@@ -1,0 +1,111 @@
+//Alter Table
+alter table EMPLOYEE add SSN int first;
+desc EMPLOYEE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| SSN       | int         | YES  |     | NULL    |       |
+| Emp_Id    | int         | YES  |     | NULL    |       |
+| Name      | varchar(20) | YES  |     | NULL    |       |
+| City      | varchar(10) | YES  |     | NULL    |       |
+| Dob       | date        | YES  |     | NULL    |       |
+| Adhaar_No | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+//Change Datatype
+alter table EMPLOYEE modify Dob year;
+desc EMPLOYEE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| SSN       | int         | YES  |     | NULL    |       |
+| Emp_Id    | int         | YES  |     | NULL    |       |
+| Name      | varchar(20) | YES  |     | NULL    |       |
+| City      | varchar(10) | YES  |     | NULL    |       |
+| Dob       | year        | YES  |     | NULL    |       |
+| Adhaar_No | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+//Drop Column
+alter table EMPLOYEE drop column Emp_Id;
+desc EMPLOYEE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| SSN       | int         | YES  |     | NULL    |       |
+| Name      | varchar(20) | YES  |     | NULL    |       |
+| City      | varchar(10) | YES  |     | NULL    |       |
+| Dob       | year        | YES  |     | NULL    |       |
+| Adhaar_No | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+//Unique Constraint
+alter table EMPLOYEE add constraint unique(SSN);
+alter table EMPLOYEE add constraint unique(Adhaar_No);
+desc EMPLOYEE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| SSN       | int         | YES  | MUL | NULL    |       |
+| Name      | varchar(20) | YES  |     | NULL    |       |
+| City      | varchar(10) | YES  |     | NULL    |       |
+| Dob       | year        | YES  |     | NULL    |       |
+| Adhaar_No | int         | YES  | UNI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+//Null Constraint
+alter table STUDENT modify column Age int null;
+desc STUDENT;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Roll_No | int         | NO   | PRI | NULL    |       |
+| Name    | varchar(20) | NO   |     | NULL    |       |
+| Age     | int         | YES  |     | NULL    |       |
+| Address | varchar(30) | YES  |     | NULL    |       |
+| Gender  | varchar(2)  | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+
+//Rename Table
+show tables;
++------------------+
+| Tables_in_shamla |
++------------------+
+| EMPLOYEE         |
+| EMPLOYEE1        |
+| STUDENT          |
+| STUDENT1         |
++------------------+
+
+alter table EMPLOYEE rename to PERSON;
+show tables;
++------------------+
+| Tables_in_shamla |
++------------------+
+| EMPLOYEE1        |
+| PERSON           |
+| STUDENT          |
+| STUDENT1         |
++------------------+
+
+
+//Delete Table
+show tables;
++------------------+
+| Tables_in_shamla |
++------------------+
+| EMPLOYEE1        |
+| PERSON           |
+| STUDENT          |
+| STUDENT1         |
++------------------+
+drop table STUDENT1;
+show tables;
++------------------+
+| Tables_in_shamla |
++------------------+
+| EMPLOYEE1        |
+| PERSON           |
+| STUDENT          |
++------------------+
+
