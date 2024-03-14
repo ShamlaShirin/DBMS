@@ -1,0 +1,129 @@
+//Update price of particular product
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    45 |
+| 222 | Bag    |   150 |
+| 333 | Soap   |    40 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   100 |
++-----+--------+-------+
+
+mysql>  update Product set price=200 where pid=222;
+
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    45 |
+| 222 | Bag    |   200 |
+| 333 | Soap   |    40 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   100 |
++-----+--------+-------+
+
+
+//Change name of City
+mysql> select * from Customer;
++-------+---------+---------+------------+------------+
+| Id    | Name    | Address | City       | Phone_No   |
++-------+---------+---------+------------+------------+
+| 10001 | Ram     | abcdefg | Calicut    | 9087231233 |
+| 10002 | Sona    | hijk    | Enakulam   | 8090887654 |
+| 10003 | Reema   | pqrst   | Trivandrum |       NULL |
+| 10004 | Fathima | uvwxyz  | Kochi      | 7856674390 |
+| 10005 | Rahman  | qwerty  | Palakkad   | 8809821341 |
++-------+---------+---------+------------+------------+
+
+mysql>update Customer set City="Kozhikode" where City="Calicut";
+
+mysql> select * from Customer;
++-------+---------+---------+------------+------------+
+| Id    | Name    | Address | City       | Phone_No   |
++-------+---------+---------+------------+------------+
+| 10001 | Ram     | abcdefg | Kozhikode  | 9087231233 |
+| 10002 | Sona    | hijk    | Enakulam   | 8090887654 |
+| 10003 | Reema   | pqrst   | Trivandrum |       NULL |
+| 10004 | Fathima | uvwxyz  | Kochi      | 7856674390 |
+| 10005 | Rahman  | qwerty  | Palakkad   | 8809821341 |
++-------+---------+---------+------------+------------+
+
+//Update price with 2%
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    45 |
+| 222 | Bag    |   200 |
+| 333 | Soap   |    40 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   100 |
++-----+--------+-------+
+
+mysql> update Product set Price=Price+(Price*2/100);
+
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    46 |
+| 222 | Bag    |   204 |
+| 333 | Soap   |    41 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   102 |
++-----+--------+-------+
+
+//Change address
+mysql> select * from Customer;
++-------+---------+---------+------------+------------+
+| Id    | Name    | Address | City       | Phone_No   |
++-------+---------+---------+------------+------------+
+| 10001 | Ram     | abcdefg | Kozhikode  | 9087231233 |
+| 10002 | Sona    | hijk    | Enakulam   | 8090887654 |
+| 10003 | Reema   | pqrst   | Trivandrum |       NULL |
+| 10004 | Fathima | uvwxyz  | Kochi      | 7856674390 |
+| 10005 | Rahman  | qwerty  | Palakkad   | 8809821341 |
++-------+---------+---------+------------+------------+
+
+mysql> update Customer set Address="opq",City="Idukki",Phone_No=9826522123 where id=10004;
+
+mysql> select * from Customer;
++-------+---------+---------+------------+------------+
+| Id    | Name    | Address | City       | Phone_No   |
++-------+---------+---------+------------+------------+
+| 10001 | Ram     | abcdefg | Kozhikode  | 9087231233 |
+| 10002 | Sona    | hijk    | Enakulam   | 8090887654 |
+| 10003 | Reema   | pqrst   | Trivandrum |       NULL |
+| 10004 | Fathima | opq     | Idukki     | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad   | 8809821341 |
++-------+---------+---------+------------+------------+
+
+//Change Quantity
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    101 |  222 |        1 |
+|    102 |  555 |        1 |
+|    104 |  444 |        2 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+mysql> update Invoice_Item set Quantity=6 where Inv_id=102;
+
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    101 |  222 |        1 |
+|    102 |  555 |        6 |
+|    104 |  444 |        2 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+
+
+
