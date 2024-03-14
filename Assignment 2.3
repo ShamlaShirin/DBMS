@@ -1,0 +1,165 @@
+//Delete record of 10001
+mysql> set foreign_key_checks=0;
+
+mysql> delete from Customer where id=10001;
+
+mysql> select * from Customer;
++-------+---------+---------+------------+------------+
+| Id    | Name    | Address | City       | Phone_No   |
++-------+---------+---------+------------+------------+
+| 10002 | Sona    | hijk    | Enakulam   | 8090887654 |
+| 10003 | Reema   | pqrst   | Trivandrum |       NULL |
+| 10004 | Fathima | opq     | Idukki     | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad   | 8809821341 |
++-------+---------+---------+------------+------------+
+
+//Delete items of quantity<2
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    101 |  222 |        1 |
+|    102 |  555 |        6 |
+|    104 |  444 |        2 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+mysql> delete from Invoice_Item where Quantity<2;
+
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    102 |  555 |        6 |
+|    104 |  444 |        2 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+//Delet purchase details of pen
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    102 |  555 |        6 |
+|    104 |  444 |        2 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    46 |
+| 222 | Bag    |   204 |
+| 333 | Soap   |    41 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   102 |
++-----+--------+-------+
+
+mysql>  delete from Invoice_Item where Inv_Id=104 and Pid=444;
+
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    102 |  555 |        6 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+//Delete details of employee who does not have phone number
+mysql> select * from Customer;
++-------+---------+---------+------------+------------+
+| Id    | Name    | Address | City       | Phone_No   |
++-------+---------+---------+------------+------------+
+| 10002 | Sona    | hijk    | Enakulam   | 8090887654 |
+| 10003 | Reema   | pqrst   | Trivandrum |       NULL |
+| 10004 | Fathima | opq     | Idukki     | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad   | 8809821341 |
++-------+---------+---------+------------+------------+
+
+mysql> set foreign_key_checks=0;
+
+mysql> delete from Customer where Id=10003;
+
+mysql> select * from Customer;
++-------+---------+---------+----------+------------+
+| Id    | Name    | Address | City     | Phone_No   |
++-------+---------+---------+----------+------------+
+| 10002 | Sona    | hijk    | Enakulam | 8090887654 |
+| 10004 | Fathima | opq     | Idukki   | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad | 8809821341 |
++-------+---------+---------+----------+------------+
+
+//Delet all record from STUDENT table
+mysql> use shamla;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+mysql> select * from STUDENT;
++---------+---------+------+-------------+--------+
+| Roll_No | Name    | Age  | Address     | Gender |
++---------+---------+------+-------------+--------+
+|       1 | Shyam   |   23 | Agdvjdhflld | M      |
+|       2 | Rose    |   22 | Ffdheudksjd | F      |
+|       3 | Reshma  |   22 | Wkuwiuekflb | F      |
+|       4 | Francis |   24 | Jjruiruiut  | M      |
+|       5 | Antony  |   23 | Mjuhuaaaq   | M      |
++---------+---------+------+-------------+--------+
+
+mysql> delete from STUDENT;
+
+mysql> select * from STUDENT;
+Empty set (0.00 sec)
+
+//Delete Invoice Details of a particular customer
+mysql> use INVOICE;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from Customer;
++-------+---------+---------+----------+------------+
+| Id    | Name    | Address | City     | Phone_No   |
++-------+---------+---------+----------+------------+
+| 10002 | Sona    | hijk    | Enakulam | 8090887654 |
+| 10004 | Fathima | opq     | Idukki   | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad | 8809821341 |
++-------+---------+---------+----------+------------+
+
+mysql> delete from Customer where Id=10002;
+
+mysql> select * from Customer;
++-------+---------+---------+----------+------------+
+| Id    | Name    | Address | City     | Phone_No   |
++-------+---------+---------+----------+------------+
+| 10004 | Fathima | opq     | Idukki   | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad | 8809821341 |
++-------+---------+---------+----------+------------+
+
+//Delete the record of invoice_item table its purchase quantity is high
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    102 |  555 |        6 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+mysql> delete from Invoice_Item where Quantity=6;
+
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+
+
+
