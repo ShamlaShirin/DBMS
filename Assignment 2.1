@@ -1,0 +1,138 @@
+//Values in PERSON
+mysql> insert into PERSON values(1,"Ram","Calicut",2000,9832);
+
+mysql> insert into PERSON values(2,"Sona","Ernakulam",2002,2547);
+
+mysql> insert into PERSON values(3,"Reema","Calicut",2002,7458);
+
+mysql> insert into PERSON values(4,"John","Kochi",2001,5473);
+
+mysql> insert into PERSON values(5,"Sam","Banglore",1998,2048);
+
+mysql> select * from PERSON;
++------+-------+-----------+------+-----------+
+| SSN  | Name  | City      | Dob  | Adhaar_No |
++------+-------+-----------+------+-----------+
+|    1 | Ram   | Calicut   | 2000 |      9832 |
+|    2 | Sona  | Ernakulam | 2002 |      2547 |
+|    3 | Reema | Calicut   | 2002 |      7458 |
+|    4 | John  | Kochi     | 2001 |      5473 |
+|    5 | Sam   | Banglore  | 1998 |      2048 |
++------+-------+-----------+------+-----------+
+
+//Values in STUDENT
+mysql> insert into STUDENT values(1,"Shyam",23,"Agdvjdhflld","M");
+
+mysql> insert into STUDENT values(2,"Rose",22,"Ffdheudksjd","F");
+
+mysql> insert into STUDENT values(3,"Reshma",22,"Wkuwiuekflb","F");
+
+mysql> insert into STUDENT values(4,"Francis",24,"Jjruiruiut","M");
+
+mysql> insert into STUDENT values(5,"Antony",23,"Mjuhuaaaq","M");
+
+mysql> select * from STUDENT;
++---------+---------+------+-------------+--------+
+| Roll_No | Name    | Age  | Address     | Gender |
++---------+---------+------+-------------+--------+
+|       1 | Shyam   |   23 | Agdvjdhflld | M      |
+|       2 | Rose    |   22 | Ffdheudksjd | F      |
+|       3 | Reshma  |   22 | Wkuwiuekflb | F      |
+|       4 | Francis |   24 | Jjruiruiut  | M      |
+|       5 | Antony  |   23 | Mjuhuaaaq   | M      |
++---------+---------+------+-------------+--------+
+
+
+//Values in INVOICE Database
+//Customer
+mysql> insert into Customer values(10001,"Ram","abcdefg","Calicut",9087231233);
+
+mysql> insert into Customer values(10002,"Sona","hijk","Enakulam",8090887654);
+
+mysql> insert into Customer(Id,Name,Address,City)values(10003,"Reema","pqrst","Trivandrum");
+
+mysql> insert into Customer values(10004,"Fathima","uvwxyz","Kochi",7856674390);
+
+mysql> insert into Customer values(10005,"Rahman","qwerty","Palakkad",8809821341);
+
+mysql> select * from Customer;
++-------+---------+---------+------------+------------+
+| Id    | Name    | Address | City       | Phone_No   |
++-------+---------+---------+------------+------------+
+| 10001 | Ram     | abcdefg | Calicut    | 9087231233 |
+| 10002 | Sona    | hijk    | Enakulam   | 8090887654 |
+| 10003 | Reema   | pqrst   | Trivandrum |       NULL |
+| 10004 | Fathima | uvwxyz  | Kochi      | 7856674390 |
+| 10005 | Rahman  | qwerty  | Palakkad   | 8809821341 |
++-------+---------+---------+------------+------------+
+
+//Invoice_Master
+mysql> insert into Invoice_Master values(101,10005,20220702);
+
+mysql> insert into Invoice_Master values(104,10003,20221123);
+
+mysql> insert into Invoice_Master values(103,10002,20230901);
+
+mysql> insert into Invoice_Master values(102,10005,20210112);
+
+mysql> insert into Invoice_Master values(101,10001,20220702);
+
+mysql> select * from Invoice_Master;
++--------+---------+------------+
+| Inv_Id | Cust_Id | Inv_date   |
++--------+---------+------------+
+|    101 |   10005 | 2022-07-02 |
+|    102 |   10005 | 2021-01-12 |
+|    103 |   10002 | 2023-09-01 |
+|    104 |   10003 | 2022-11-23 |
+|    105 |   10005 | 2021-05-18 |
++--------+---------+------------+
+
+//Product
+mysql> insert into Product values(111,"Boook",45);
+
+mysql> insert into Product values(222,"Bag",150);
+
+mysql> insert into Product values(333,"Soap",40);
+
+mysql> insert into Product values(444,"Pen",10);
+
+mysql> insert into Product values(555,"Bottle",100);
+
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    45 |
+| 222 | Bag    |   150 |
+| 333 | Soap   |    40 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   100 |
++-----+--------+-------+
+
+//Invoice_Item
+mysql> insert into Invoice_Item values(101,222,1);
+
+mysql> insert into Invoice_Item values(102,555,1);
+
+mysql> insert into Invoice_Item values(104,444,2);
+
+mysql> insert into Invoice_Item values(103,333,2);
+
+mysql> insert into Invoice_Item values(101,111,5);
+
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    101 |  222 |        1 |
+|    102 |  555 |        1 |
+|    104 |  444 |        2 |
+|    103 |  333 |        2 |
++--------+------+----------+
+
+
+
+
+
