@@ -1,0 +1,191 @@
+//Commit
+mysql> use shamla;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> set autocommit=off;
+
+mysql> insert into STUDENT values(2,"Ram",13,"abcd","m");
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from STUDENT;
++---------+------+------+---------+--------+
+| Roll_No | Name | Age  | Address | Gender |
++---------+------+------+---------+--------+
+|       1 | ria  |   12 | djhdjjc | f      |
+|       2 | Ram  |   13 | abcd    | m      |
++---------+------+------+---------+--------+
+
+//Rollback
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from STUDENT where Name="ria";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from STUDENT;
++---------+------+------+---------+--------+
+| Roll_No | Name | Age  | Address | Gender |
++---------+------+------+---------+--------+
+|       2 | Ram  |   13 | abcd    | m      |
++---------+------+------+---------+--------+
+1 row in set (0.01 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from STUDENT;
++---------+------+------+---------+--------+
+| Roll_No | Name | Age  | Address | Gender |
++---------+------+------+---------+--------+
+|       1 | ria  |   12 | djhdjjc | f      |
+|       2 | Ram  |   13 | abcd    | m      |
++---------+------+------+---------+--------+
+2 rows in set (0.01 sec)
+
+//savepoint
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from STUDENT;
++---------+------+------+---------+--------+
+| Roll_No | Name | Age  | Address | Gender |
++---------+------+------+---------+--------+
+|       1 | ria  |   12 | djhdjjc | f      |
+|       2 | Ram  |   13 | abcd    | m      |
++---------+------+------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into STUDENT values(3,"Roy",10,"qwertty","m");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into STUDENT values(4,"john",12,"tyui","m");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into STUDENT values(5,"Fathima",11,"mnopq","f");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s3;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from STUDENT;
++---------+---------+------+---------+--------+
+| Roll_No | Name    | Age  | Address | Gender |
++---------+---------+------+---------+--------+
+|       1 | ria     |   12 | djhdjjc | f      |
+|       2 | Ram     |   13 | abcd    | m      |
+|       3 | Roy     |   10 | qwertty | m      |
+|       4 | john    |   12 | tyui    | m      |
+|       5 | Fathima |   11 | mnopq   | f      |
++---------+---------+------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> rollback to s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from STUDENT;
++---------+------+------+---------+--------+
+| Roll_No | Name | Age  | Address | Gender |
++---------+------+------+---------+--------+
+|       1 | ria  |   12 | djhdjjc | f      |
+|       2 | Ram  |   13 | abcd    | m      |
+|       3 | Roy  |   10 | qwertty | m      |
+|       4 | john |   12 | tyui    | m      |
++---------+------+------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+//DCL Commands
+//Grant
+mysql> create user Shamla @'localhost' identified by 'mypass';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create user Shirin @'localhost' identified by 'pass';
+Query OK, 0 rows affected (0.00 sec)
+ 
+msql> grant select on INVOICE.Customer to Shamla @'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for Shamla@'localhost';
++--------------------------------------------------------------+
+| Grants for Shamla@localhost                                  |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Shamla`@`localhost`                   |
+| GRANT SELECT ON `INVOICE`.`Customer` TO `Shamla`@`localhost` |
++--------------------------------------------------------------+
+2 rows in set (0.01 sec)
+
+mysql> grant select,update on INVOICE.Customer to Shirin@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Shirin@'localhost';
++----------------------------------------------------------------------+
+| Grants for Shirin@localhost                                          |
++----------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Shirin`@`localhost`                           |
+| GRANT SELECT, UPDATE ON `INVOICE`.`Customer` TO `Shirin`@`localhost` |
++----------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> grant insert,select on INVOICE.Customer to Shamla@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for Shamla@'localhost';
++----------------------------------------------------------------------+
+| Grants for Shamla@localhost                                          |
++----------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Shamla`@`localhost`                           |
+| GRANT SELECT, INSERT ON `INVOICE`.`Customer` TO `Shamla`@`localhost` |
++----------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> grant update,delete on INVOICE.* to Shirin@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Shirin@'localhost';
++----------------------------------------------------------------------+
+| Grants for Shirin@localhost                                          |
++----------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Shirin`@`localhost`                           |
+| GRANT UPDATE, DELETE ON `INVOICE`.* TO `Shirin`@`localhost`          |
+| GRANT SELECT, UPDATE ON `INVOICE`.`Customer` TO `Shirin`@`localhost` |
++----------------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+//Revoke
+mysql> revoke select on INVOICE.Customer from  Shamla@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Shamla@'localhost';
++--------------------------------------------+
+| Grants for Shamla@localhost                |
++--------------------------------------------+
+| GRANT USAGE ON *.* TO `Shamla`@`localhost` |
++--------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> revoke delete on INVOICE.* from  Shirin@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Shirin@'localhost';
++----------------------------------------------------------------------+
+| Grants for Shirin@localhost                                          |
++----------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Shirin`@`localhost`                           |
+| GRANT UPDATE ON `INVOICE`.* TO `Shirin`@`localhost`                  |
+| GRANT SELECT, UPDATE ON `INVOICE`.`Customer` TO `Shirin`@`localhost` |
++----------------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+
