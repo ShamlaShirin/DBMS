@@ -1,0 +1,81 @@
+//List the product name & quantity of invoice items
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    46 |
+| 222 | Bag    |   204 |
+| 333 | Soap   |    41 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   102 |
++-----+--------+-------+
+
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    103 |  333 |        2 |
+|    102 |  111 |        2 |
++--------+------+----------+
+
+mysql> select Pname,Quantity from Product INNER JOIN Invoice_Item ON Product.Pid=Invoice_Item.Pid;
++-------+----------+
+| Pname | Quantity |
++-------+----------+
+| Boook |        5 |
+| Soap  |        2 |
+| Boook |        2 |
++-------+----------+
+
+//Display invoice details of the transaction dated '2022-07-02'
+mysql> select * from Customer;
++-------+---------+---------+-----------+------------+
+| Id    | Name    | Address | City      | Phone_No   |
++-------+---------+---------+-----------+------------+
+| 10004 | Fathima | opq     | Idukki    | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad  | 8809821341 |
+| 10006 | Liya    | lmnop   | Ernakulam | 8976860989 |
+| 10007 | Ram     | abcd    | Tvm       | 9908654231 |
+| 10008 | Anandhi | qweee   | Palakkad  | 9900882341 |
++-------+---------+---------+-----------+------------+
+
+mysql> select * from Invoice_Master;
++--------+---------+------------+
+| Inv_Id | Cust_Id | Inv_date   |
++--------+---------+------------+
+|    101 |   10005 | 2022-07-02 |
+|    102 |   10005 | 2021-01-12 |
+|    103 |   10002 | 2023-09-01 |
+|    104 |   10003 | 2022-11-23 |
+|    105 |   10005 | 2021-05-18 |
++--------+---------+------------+
+
+mysql> select * from Invoice_Item;
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    103 |  333 |        2 |
+|    102 |  111 |        2 |
++--------+------+----------+
+
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    46 |
+| 222 | Bag    |   204 |
+| 333 | Soap   |    41 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   102 |
++-----+--------+-------+
+
+mysql> select * from Customer INNER JOIN Invoice_Master ON Customer.Id=Invoice_Master.Cust_Id INNER JOIN Invoice_Item ON Invoice_Master.Inv_Id=Invoice_Item.Inv_Id INNER JOIN Product ON Invoice_Item.Pid=Product.Pid where Inv_date=20220702;
++-------+--------+---------+----------+------------+--------+---------+------------+--------+------+----------+-----+-------+-------+
+| Id    | Name   | Address | City     | Phone_No   | Inv_Id | Cust_Id | Inv_date   | Inv_Id | Pid  | Quantity | Pid | Pname | Price |
++-------+--------+---------+----------+------------+--------+---------+------------+--------+------+----------+-----+-------+-------+
+| 10005 | Rahman | qwerty  | Palakkad | 8809821341 |    101 |   10005 | 2022-07-02 |    101 |  111 |        5 | 111 | Boook |    46 |
++-------+--------+---------+----------+------------+--------+---------+------------+--------+------+----------+-----+-------+-------+
+
+
