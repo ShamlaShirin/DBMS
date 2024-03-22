@@ -1,0 +1,84 @@
+//List product name,price except soap on price order
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    46 |
+| 222 | Bag    |   204 |
+| 333 | Soap   |    41 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   102 |
++-----+--------+-------+
+
+mysql> select Pname,Price from Product where Pname !='Soap' ORDER BY Price;
++--------+-------+
+| Pname  | Price |
++--------+-------+
+| Pen    |    10 |
+| Boook  |    46 |
+| Bottle |   102 |
+| Bag    |   204 |
++--------+-------+
+
+//Find min,max & avg price of products
+mysql> select * from Product;
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    46 |
+| 222 | Bag    |   204 |
+| 333 | Soap   |    41 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   102 |
++-----+--------+-------+
+
+mysql> select MIN(Price),MAX(Price),AVG(Price) from Product;
++------------+------------+------------+
+| MIN(Price) | MAX(Price) | AVG(Price) |
++------------+------------+------------+
+|         10 |        204 |    80.6000 |
++------------+------------+------------+
+
+//Find no.of customers in each city
+mysql> select * from Customer;
++-------+---------+---------+-----------+------------+
+| Id    | Name    | Address | City      | Phone_No   |
++-------+---------+---------+-----------+------------+
+| 10004 | Fathima | opq     | Idukki    | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad  | 8809821341 |
+| 10006 | Liya    | lmnop   | Ernakulam | 8976860989 |
+| 10007 | Ram     | abcd    | Tvm       | 9908654231 |
+| 10008 | Anandhi | qweee   | Palakkad  | 9900882341 |
++-------+---------+---------+-----------+------------+
+
+mysql> select City,COUNT(*) from Customer GROUP BY City;
++-----------+----------+
+| City      | COUNT(*) |
++-----------+----------+
+| Idukki    |        1 |
+| Palakkad  |        2 |
+| Ernakulam |        1 |
+| Tvm       |        1 |
++-----------+----------+
+
+//find no.of customers in each city,only include city with more than 1 customers
+mysql> select * from Customer;
++-------+---------+---------+-----------+------------+
+| Id    | Name    | Address | City      | Phone_No   |
++-------+---------+---------+-----------+------------+
+| 10004 | Fathima | opq     | Idukki    | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad  | 8809821341 |
+| 10006 | Liya    | lmnop   | Ernakulam | 8976860989 |
+| 10007 | Ram     | abcd    | Tvm       | 9908654231 |
+| 10008 | Anandhi | qweee   | Palakkad  | 9900882341 |
++-------+---------+---------+-----------+------------+
+
+mysql> select City,COUNT(*) from Customer GROUP BY City HAVING COUNT(City)>1;
++----------+----------+
+| City     | COUNT(*) |
++----------+----------+
+| Palakkad |        2 |
++----------+----------+
+
+
+
