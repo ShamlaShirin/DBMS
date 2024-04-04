@@ -1,0 +1,53 @@
+PL/SQL PROGRAMS-STORED PROCEDURES
+---------------------------------
+//Create a procedure to display all tables in the invoice database
+mysql> delimiter //
+mysql> create PROCEDURE invoice() 
+    -> begin
+    -> select * from Customer;
+    -> select * from Product;
+    -> select * from Invoice_Master;
+    -> select * from Invoice_Item; 
+    -> end
+    -> //
+    
+mysql> call invoice();
+    -> //
++-------+---------+---------+-----------+------------+
+| Id    | Name    | Address | City      | Phone_No   |
++-------+---------+---------+-----------+------------+
+| 10004 | Fathima | opq     | Idukki    | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad  | 8809821341 |
+| 10006 | Liya    | lmnop   | Ernakulam | 8976860989 |
+| 10007 | Ram     | abcd    | Tvm       | 9908654231 |
+| 10008 | Anandhi | qweee   | Palakkad  | 9900882341 |
++-------+---------+---------+-----------+------------+
+
++-----+--------+-------+
+| Pid | Pname  | Price |
++-----+--------+-------+
+| 111 | Boook  |    46 |
+| 222 | Bag    |   204 |
+| 333 | Soap   |    41 |
+| 444 | Pen    |    10 |
+| 555 | Bottle |   102 |
++-----+--------+-------+
+
++--------+---------+------------+
+| Inv_Id | Cust_Id | Inv_date   |
++--------+---------+------------+
+|    101 |   10005 | 2022-07-02 |
+|    102 |   10005 | 2021-01-12 |
+|    103 |   10002 | 2023-09-01 |
+|    104 |   10003 | 2022-11-23 |
+|    105 |   10005 | 2021-05-18 |
++--------+---------+------------+
+
++--------+------+----------+
+| Inv_Id | Pid  | Quantity |
++--------+------+----------+
+|    101 |  111 |        5 |
+|    103 |  333 |        2 |
+|    102 |  111 |        2 |
++--------+------+----------+
+
