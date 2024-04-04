@@ -1,0 +1,89 @@
+PL/SQL PROGRAMS-TRIGGERS
+------------------------
+//Create a trigger to handle updates to the customer table
+mysql> create temporary table Customer1 select * from Customer;
+    -> //
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc Customer1;
+    -> //
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Id       | int         | NO   |     | NULL    | NULL  |
+| Name     | varchar(20) | YES  |     | NULL    | NULL  |
+| Address  | varchar(30) | YES  |     | NULL    | NULL  |
+| City     | varchar(10) | YES  |     | NULL    | NULL  |
+| Phone_No | bigint      | YES  |     | NULL    | NULL  |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create TRIGGER Cust_Trig after update on Customer for each row begin insert into Customer1 set Id=New.Id,Name=New.Name,Address=New.Address,City=New.City,Phone_No=New.Phone_No;
+    -> end
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from Customer;
+    -> //
++-------+---------+---------+-----------+------------+
+| Id    | Name    | Address | City      | Phone_No   |
++-------+---------+---------+-----------+------------+
+| 10004 | Fathima | opq     | Idukki    | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad  | 8809821341 |
+| 10006 | Liya    | lmnop   | Ernakulam | 8976860989 |
+| 10007 | Ram     | abcd    | Tvm       | 9908654231 |
+| 10008 | Anandhi | qweee   | Palakkad  | 9900882341 |
++-------+---------+---------+-----------+------------+
+
+mysql> update Customer set City ="Idukki" where Id=10007;
+    -> //
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update Customer set Phone_No =9870564534 where Id=10006;
+    -> //
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Customer1;
+    -> //
++-------+---------+---------+-----------+------------+
+| Id    | Name    | Address | City      | Phone_No   |
++-------+---------+---------+-----------+------------+
+| 10004 | Fathima | opq     | Idukki    | 9826522123 |
+| 10005 | Rahman  | qwerty  | Palakkad  | 8809821341 |
+| 10006 | Liya    | lmnop   | Ernakulam | 8976860989 |
+| 10007 | Ram     | abcd    | Tvm       | 9908654231 |
+| 10008 | Anandhi | qweee   | Palakkad  | 9900882341 |
+| 10004 | Fathima | opq     | Idukki    | 9826522123 |
+| 10007 | Ram     | abcd    | Idukki    | 9908654231 |
+| 10006 | Liya    | lmnop   | Ernakulam | 9870564534 |
++-------+---------+---------+-----------+------------+
+8 rows in set (0.00 sec)
+
+mysql> truncate Customer1;
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from Customer1;
+    -> //
+Empty set (0.00 sec)
+
+mysql> update Customer set City ="Tvm" where Id=10007;
+    -> //
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Customer1;
+    -> //
++-------+------+---------+------+------------+
+| Id    | Name | Address | City | Phone_No   |
++-------+------+---------+------+------------+
+| 10007 | Ram  | abcd    | Tvm  | 9908654231 |
++-------+------+---------+------+------------+
+
+
+
+
+
