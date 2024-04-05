@@ -84,4 +84,4 @@ mysql> select Pname from Product where Pid IN (select Pid from Invoice_Item wher
 | Boook |
 +-------+
 
-
+//VERIFIED
