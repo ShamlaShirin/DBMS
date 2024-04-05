@@ -78,4 +78,4 @@ mysql> select * from Customer INNER JOIN Invoice_Master ON Customer.Id=Invoice_M
 | 10005 | Rahman | qwerty  | Palakkad | 8809821341 |    101 |   10005 | 2022-07-02 |    101 |  111 |        5 | 111 | Boook |    46 |
 +-------+--------+---------+----------+------------+--------+---------+------------+--------+------+----------+-----+-------+-------+
 
-
+//VERIFIED
