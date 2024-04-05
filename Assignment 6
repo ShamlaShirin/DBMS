@@ -80,5 +80,5 @@ mysql> select City,COUNT(*) from Customer GROUP BY City HAVING COUNT(City)>1;
 | Palakkad |        2 |
 +----------+----------+
 
-
+//VERIFIED
 
