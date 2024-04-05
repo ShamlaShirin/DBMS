@@ -115,4 +115,4 @@ mysql> select * from Customer where City NOT IN ("Tvm");
 | 10006 | Liya    | lmnop   | Ernakulam | 8976860989 |
 +-------+---------+---------+-----------+------------+
 
-
+//VERIFIED
