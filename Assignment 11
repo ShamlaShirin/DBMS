@@ -83,7 +83,7 @@ mysql> select * from Customer1;
 | 10007 | Ram  | abcd    | Tvm  | 9908654231 |
 +-------+------+---------+------+------------+
 
-
+//VERIFIED
 
 
 
