@@ -72,6 +72,7 @@ INVOICE> db.Customer.updateOne({"City":"Calicut"},{$set:{"City":"Ernakulam"}})
   upsertedCount: 0
 }
 
+//VERIFIED
 //to delete the first matched document whose City is "Ernakulam"
 INVOICE> db.Customer.deleteOne({"City":"Ernakulam"})
 { acknowledged: true, deletedCount: 1 }
