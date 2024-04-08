@@ -1,0 +1,78 @@
+//create an INVOICE db & collections(Customer,Product) & its corresponding documents
+test> use INVOICE
+switched to db INVOICE
+INVOICE> db.createCollection("Customer")
+{ ok: 1 }
+INVOICE> db.createCollection("Product")
+{ ok: 1 }
+INVOICE> db.Customer.insert({"Id":"10001","Name":"Ram","Address":"abcdefg","City":"Calicut"})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("661389b9d9b27d73b550b021") }
+}
+INVOICE> db.Customer.insertMany([{"Id":"10002","Name":"Sona","Address":"hijk","City":"Ernakulam","Phone_No":"8090887654"},{"Id":"10003","Name":"Reema","Address":"pqrst"},{"Id":"10004","Name":"Fathima","City":"Kochi"},{"Id":"10005","Name":"Rahman","Address":"qwerty","City":"Palakkad","Phone_No":"8809821341"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("66138bc8d9b27d73b550b022"),
+    '1': ObjectId("66138bc8d9b27d73b550b023"),
+    '2': ObjectId("66138bc8d9b27d73b550b024"),
+    '3': ObjectId("66138bc8d9b27d73b550b025")
+  }
+}
+
+//to find all documents from the collection Customer
+INVOICE> db.Customer.find()
+[
+  {
+    _id: ObjectId("661389b9d9b27d73b550b021"),
+    Id: '10001',
+    Name: 'Ram',
+    Address: 'abcdefg',
+    City: 'Calicut'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b022"),
+    Id: '10002',
+    Name: 'Sona',
+    Address: 'hijk',
+    City: 'Ernakulam',
+    Phone_No: '8090887654'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b023"),
+    Id: '10003',
+    Name: 'Reema',
+    Address: 'pqrst'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b024"),
+    Id: '10004',
+    Name: 'Fathima',
+    City: 'Kochi'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b025"),
+    Id: '10005',
+    Name: 'Rahman',
+    Address: 'qwerty',
+    City: 'Palakkad',
+    Phone_No: '8809821341'
+  }
+]
+
+//to update the City in the collection Customer
+INVOICE> db.Customer.updateOne({"City":"Calicut"},{$set:{"City":"Ernakulam"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+//to delete the first matched document whose City is "Ernakulam"
+INVOICE> db.Customer.deleteOne({"City":"Ernakulam"})
+{ acknowledged: true, deletedCount: 1 }
+
