@@ -1,0 +1,87 @@
+//to display the Customer documents having City "Ernakulam","Kochi"
+INVOICE> db.Customer.find({$or:[{"City":"Ernakulam"},{"City":"Kochi"}]})
+[
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b022"),
+    Id: '10002',
+    Name: 'Sona',
+    Address: 'hijk',
+    City: 'Ernakulam',
+    Phone_No: '8090887654'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b024"),
+    Id: '10004',
+    Name: 'Fathima',
+    City: 'Kochi'
+  }
+]
+
+//to display all customer documents who have age>50
+INVOICE> db.Customer.find({"Age":{$gt:"50"}}).pretty()
+[
+  {
+    _id: ObjectId("661ca8254893d3e525157b20"),
+    Id: '10006',
+    Name: 'Shyam',
+    Age: '56',
+    City: 'Calicut'
+  },
+  {
+    _id: ObjectId("661ca8494893d3e525157b21"),
+    Id: '10008',
+    Name: 'Ajmal',
+    Age: '60',
+    City: 'Tvm'
+  }
+]
+
+//to find customer documents who not live in "tvm"
+INVOICE> db.Customer.find({"City":{$ne:"Tvm"}}).pretty()
+[
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b022"),
+    Id: '10002',
+    Name: 'Sona',
+    Address: 'hijk',
+    City: 'Ernakulam',
+    Phone_No: '8090887654'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b023"),
+    Id: '10003',
+    Name: 'Reema',
+    Address: 'pqrst'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b024"),
+    Id: '10004',
+    Name: 'Fathima',
+    City: 'Kochi'
+  },
+  {
+    _id: ObjectId("66138bc8d9b27d73b550b025"),
+    Id: '10005',
+    Name: 'Rahman',
+    Address: 'qwerty',
+    City: 'Palakkad',
+    Phone_No: '8809821341'
+  },
+  {
+    _id: ObjectId("661ca8254893d3e525157b20"),
+    Id: '10006',
+    Name: 'Shyam',
+    Age: '56',
+    City: 'Calicut'
+  },
+  {
+    _id: ObjectId("661ca8774893d3e525157b22"),
+    Id: '10007',
+    Name: 'Raju',
+    Address: 'abc',
+    Age: '40',
+    City: 'Kochi'
+  }
+]
+
+
