@@ -1,0 +1,88 @@
+//to create a user "Customer1" and grant the read role in the INVOICE database
+INVOICE> db.createUser({user:"Customer1",pwd:"1234",roles:[{role:"read",db:"INVOICE"}]})
+{ ok: 1 }
+
+//to create the backup for the dd database
+test> use dd
+switched to db dd
+dd> db.createCollection("customer")
+{ ok: 1 }
+dd> show dbs
+INVOICE    80.00 KiB
+admin     180.00 KiB
+config    108.00 KiB
+db         88.00 KiB
+dd          8.00 KiB
+hiku       24.00 KiB
+invoices  100.00 KiB
+ksb        40.00 KiB
+librari    16.00 KiB
+library    48.00 KiB
+local      80.00 KiB
+mb        224.00 KiB
+test        8.00 KiB
+dd> 
+[1]+  Stopped                 mongosh
+ksb@ksb-H410M-S2-V2:~$ mongodump --db dd
+
+test> show dbs
+INVOICE    80.00 KiB
+admin     180.00 KiB
+config    108.00 KiB
+db         88.00 KiB
+dd          8.00 KiB
+hiku       24.00 KiB
+invoices  100.00 KiB
+ksb        40.00 KiB
+librari    16.00 KiB
+library    48.00 KiB
+local      80.00 KiB
+mb        224.00 KiB
+test        8.00 KiB
+test> use dd
+switched to db dd
+dd> db.dropDatabase()
+{ ok: 1, dropped: 'dd' }
+dd> use test
+switched to db test
+test> show dbs
+INVOICE    80.00 KiB
+admin     180.00 KiB
+config    108.00 KiB
+db         88.00 KiB
+hiku       24.00 KiB
+invoices  100.00 KiB
+ksb        40.00 KiB
+librari    16.00 KiB
+library    48.00 KiB
+local      80.00 KiB
+mb        224.00 KiB
+test        8.00 KiB
+test> 
+[2]+  Stopped                 mongosh
+
+
+//to restore a particular database or a collection
+ksb@ksb-H410M-S2-V2:~$ mongorestore --db dd dump/dd
+2024-04-15T12:01:09.746+0530	0 document(s) restored successfully. 0 document(s) failed to restore.
+ksb@ksb-H410M-S2-V2:~$ mongosh
+
+test> show dbs
+INVOICE    80.00 KiB
+admin     180.00 KiB
+config    108.00 KiB
+db         88.00 KiB
+dd          8.00 KiB
+hiku       24.00 KiB
+invoices  100.00 KiB
+ksb        40.00 KiB
+librari    16.00 KiB
+library    48.00 KiB
+local      80.00 KiB
+mb        224.00 KiB
+test        8.00 KiB
+test> use dd
+switched to db dd
+dd> show collections
+customer
+
